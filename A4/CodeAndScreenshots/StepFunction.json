@@ -1,0 +1,105 @@
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "Lambda Invoke",
+  "States": {
+    "Lambda Invoke": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:us-east-1:577987334288:function:Assignment4:$LATEST"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Choice"
+    },
+    "Choice": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.body",
+          "StringMatches": "Tier 1",
+          "Next": "SQS Tier 1"
+        },
+        {
+          "Variable": "$.body",
+          "StringMatches": "Tier 2",
+          "Next": "SQS Tier 2"
+        },
+        {
+          "Variable": "$.body",
+          "StringMatches": "Tier 3",
+          "Next": "SQS Tier 3"
+        },
+        {
+          "Variable": "$.body",
+          "StringMatches": "Unknown",
+          "Next": "SQS Unknown"
+        }
+      ]
+    },
+    "SQS Unknown": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage",
+      "Parameters": {
+        "MessageBody.$": "$",
+        "QueueUrl": "https://sqs.us-east-1.amazonaws.com/577987334288/Unknown"
+      },
+      "Next": "Unknown",
+      "InputPath": "$.message"
+    },
+    "SQS Tier 3": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage",
+      "Parameters": {
+        "MessageBody.$": "$",
+        "QueueUrl": "https://sqs.us-east-1.amazonaws.com/577987334288/Tier3"
+      },
+      "Next": "Tier 3 - Success",
+      "InputPath": "$.message"
+    },
+    "SQS Tier 2": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage",
+      "Parameters": {
+        "MessageBody.$": "$",
+        "QueueUrl": "https://sqs.us-east-1.amazonaws.com/577987334288/Tier2"
+      },
+      "Next": "Tier 2 - Success",
+      "InputPath": "$.message"
+    },
+    "SQS Tier 1": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sqs:sendMessage",
+      "Parameters": {
+        "MessageBody.$": "$",
+        "QueueUrl": "https://sqs.us-east-1.amazonaws.com/577987334288/Tier1"
+      },
+      "Next": "Tier 1 - Success",
+      "InputPath": "$.message"
+    },
+    "Tier 1 - Success": {
+      "Type": "Succeed"
+    },
+    "Tier 2 - Success": {
+      "Type": "Succeed"
+    },
+    "Tier 3 - Success": {
+      "Type": "Succeed"
+    },
+    "Unknown": {
+      "Type": "Succeed"
+    }
+  }
+}

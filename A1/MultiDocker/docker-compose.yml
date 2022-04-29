@@ -1,0 +1,14 @@
+version: '3'
+services:
+  c1:
+    image:  lokanshgupta/app1
+    container_name: c1
+    ports:
+      - 5000:5000
+
+  c2:
+    image:  lokanshgupta/app2
+    container_name: c2
+    volumes:
+      - .:/etc/data:ro
+    
