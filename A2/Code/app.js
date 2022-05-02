@@ -3,10 +3,10 @@ const bodyParser = require("body-parser");
 var AWS = require("aws-sdk");
 
 const s3 = new AWS.S3({
-  accessKeyId: "ASIAYNEV22CIG7LCEI5W",
-  secretAccessKey: "i7hLR28pIAAAEcfgIzLNTiPT3q1RNJtZbKLtbdLq",
+  accessKeyId: "*****",
+  secretAccessKey: "*****",
   sessionToken:
-    "FwoGZXIvYXdzEAAaDNGADxx7pWdOAFoRqyLAAem+kzXEIGig8NAZLKT/X1NyPYyICYlheDN+rbqrMAqiHAZcXtYwzZh0TQE6JJEqjTLp6dmmtD7sMva8coTe3+QXXracXbmg+ka9LbVr0K+jbwePMPGZmbe+v4pUFWy/u+suDEyHoSzckG7MlFU1PoUdsVC/mIGd6X1TN/5rg+fOVeSEiDOF6LL6MJlQ8+ZhRCwUAMmw/y83Ej8bJCFVCrh1/jSpTK80ygQVOOPC+94Z4taOylLl7v3BvDbi5rUSEijK4YaRBjItqtc1zrap1PowJw8MZhQtMpNsBlCIO0Ls+ao+4bLRpXrzSq5Lbix23ejHCAiD",
+    "*****",
   region: "us-east-1",
 });
 
