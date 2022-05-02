@@ -22,10 +22,10 @@ var AWS = require("aws-sdk"),
 // Create a Secrets Manager client
 var client = new AWS.SecretsManager({
   region: region,
-  accessKeyId: "ASIAYNEV22CIJKK44MCY",
-  secretAccessKey: "puKVUXWXWotmjOej1XxAfxL+jAMAh3vBnl6xV6Vd",
+  accessKeyId: "*****",
+  secretAccessKey: "*****",
   sessionToken:
-    "FwoGZXIvYXdzEN3//////////wEaDM5/NHUl/5uS6fg6uiLAAYuUM4u5qQnOyXc84MSgBcepmOlp/8cp+QgV067hYvZi8bknFBYHDx8WreCh+CLMqTivxvLKWe0/u38vXLeU00/7csbgee3nOHNsEFEFEnEsIP3VfHeYxfBNSs9oEVEVNjJTBSIfe0mIh3CP5DgaxvokncjV22/z+chsjbtpqMu0NNwHmhW8o38MbNWorWyPwCEWBoyTMX+f/KWKox5/qDE1nlkOPNouLPHEWsV33hIdXbVEZnfdiW2r724YWr0Waijaxu+RBjIt/cqDtCJ3w2GO9DiQT38T/oGaxbKhDgvs19hFhh1BJ0TZak4k2dG3uR4nPsgQ",
+    "*****",
 });
 
 //https://stackoverflow.com/questions/57618689/how-do-i-use-aws-secret-manager-with-nodejs-lambda
